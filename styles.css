@@ -16,8 +16,6 @@ html, body {
     box-shadow: 3px 10px 20px 5px rgba(0, 0, 0, .5);
     width: 80%;
     margin: 40px auto 0;
-    display: flex;
-    flex-flow: column;
     font-size: calc(.7rem + 1vw);
 }
 .info {
@@ -86,42 +84,62 @@ html, body {
     background: rgba(20, 20, 20, .8);
     padding: 10px 70px;
 }
-
-.lyrics-container {
+.content-container {
     background: rgba(20, 20, 20, .8);
     color: #fff;
     box-shadow: 3px 10px 20px 5px rgba(0, 0, 0, .5);
     width: 80%;
     margin: 40px auto;
     color: rgba(10, 180, 180, 1);
+    line-height: 1.3;
     display: none;
 }
-.lyrics-container h2 {
+.content-container h2 {
     text-align: center;
     padding-top: 20px;
 }
-.lyrics {
+.lyrics-text {
     padding: 0 30px 20px;
 }
-.error {
+.wiki-content {
+    text-align: center;
+    color: #fff;
+}
+.wiki-img {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+    border: none;
+    vertical-align: middle;
+}
+.wiki-text {
     padding: 0 30px 20px;
-    margin-top: -40px;
+    text-align: left;
 }
 .active {
     display: block;
 }
 
-@media all and (min-width: 992px) {
-    .search-container {
-        flex-flow: row;
-
+@media all and (min-width: 768px) {
+    .search-container,
+    .for-flex {
+        display: flex;
     }
-    .info {
+    .info,
+    .lyrics-content {
         width: 45%;
         padding: 30px;
     }
-    .search-form {
+    .search-form,
+    .wiki-content {
         width: 70%;
         padding: 30px 0;
+    }
+    .lyrics-content {
+        order: 2;
+    }
+    .wiki-content {
+        order: 1;
+        background: rgba(20, 40, 40, .8)
     }
 }
