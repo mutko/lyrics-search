@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Lyrics Search App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+
+</head>
+<body>
+
+    <div class="search-container">
+        <h1>Find your favorite song lyrics</h1>
+        <p>Enter artist and song title.</p>
+        <p>Hit Search or Enter and Enjoy!</p>
+
+        <form action="" class="search-form">
+
+            <div class="form-group">
+                <label for="artist">Artist</label>
+                <input type="text" name="artist" class="artist">
+            </div>
+            <div class="form-group">
+                <label for="song">Song</label>
+                <input type="text" name="song" class="song">
+            </div>
+            <button type="submit" class="btn-search">Search</button>
+        </form>
+
+    </div><!-- END Search Container-->
+
+    <div class="content-container">
+        <h2 class="title"></h2>
+        <div class="lyrics"></div>
+        <div class="error"></div>
+    </div><!-- END Content Container-->
+    <script>
+ 
+        function findLyrics() {
+
+            const artist = document.querySelector('.artist').value;
+            const song = document.querySelector('.song').value;
+
+            const title = document.querySelector('.title');
+            const lyrics = document.querySelector('.lyrics');
+            const error = document.querySelector('.error');
+
+            const url = `https://api.lyrics.ovh/v1/${artist}/${song}`;
+            
+            fetch(url)
+                .then(function(response) {
+                    return response.json();
+                })
+                .then(function(response) {
+                    console.log(response.lyrics);
+                    title.innerText = artist + " - " + song;
+                    lyrics.innerText = response.lyrics ? response.lyrics : "Sorry. We can't find that song :(";
+                })
+                .catch(function(response) {
+                    error.innerText = "There is mistake somewhere. Check internet."
+                })
+        }  // END of findLyrics function
+
+        const form = document.querySelector('.search-form');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            findLyrics();
+        })
+    </script>
+</body>
+</html>
