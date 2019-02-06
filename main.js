@@ -26,6 +26,12 @@ function findLyrics() {
     const wikiImg = document.querySelector('.wiki-img');
     const wikiText = document.querySelector('.wiki-text');
 
+    function toTitleCase(artist) {
+        return artis.replace(/\w\S*/g, function(txt){
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
+    }
+
     const wikiUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${artist}&prop=extracts|pageimages|info&pithumbsize=400&inprop=url&redirects=&format=json&origin=*`;
 
     fetch(wikiUrl) 
@@ -37,13 +43,12 @@ function findLyrics() {
 
             let wikiApiTitle = pages[Object.keys(pages)[0]].title;
             let wikiApiArticle = pages[Object.keys(pages)[0]].extract;
-            let wikiApiImg = pages[Object.keys(pages)[0]].thumbnail.source;
 
-            console.log(wikiApiImg);
-            
+            (pages[Object.keys(pages)[0]].thumbnail === undefined) ? wikiImg.src = "default-img.jpg" : wikiImg.src = pages[Object.keys(pages)[0]].thumbnail.source;
+
             wikiTitle.innerHTML = wikiApiTitle;
             wikiText.innerHTML = wikiApiArticle;
-            wikiImg.src = wikiApiImg;
+
         })
 
 

@@ -101,6 +101,9 @@ html, body {
 .lyrics-text {
     padding: 0 30px 20px;
 }
+.lyrics-title {
+    text-transform: uppercase;
+}
 .wiki-content {
     text-align: center;
     color: #fff;
